@@ -40,9 +40,7 @@ public class ResponseBase<ResponseCode>
         UInt16? upperBound = upperField.GetValue(null) as UInt16?;
 
         int level = GetCodeLevel();
-        
+
         return lowerBound <= level && level <= upperBound;
     }
-
-    public static bool operator ==(ResponseBase<ResponseCode> response, ResponseCode code) => response.Code == code;
 }
