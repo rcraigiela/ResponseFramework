@@ -1,4 +1,6 @@
 using ResponseFramework.Configuration.ResponseLevel;
+using ResponseFramework.Extensions;
+using ResponseFramework.Extensions.ResponseLevel;
 using ResponseFramework.Tests.Helpers;
 
 namespace ResponseFramework.Tests;
@@ -16,12 +18,12 @@ public class Tests
         var response = CreateResponse.Factory.Success("It succeeded!");
 
         Assert.That(response.Code, Is.EqualTo(CreateResponseCode.Success));
-        Assert.True(response.Is<ResponseSuccess>());
-        Assert.False(response.Is<ResponseCritical>());
-        Assert.False(response.Is<ResponseError>());
-        Assert.False(response.Is<ResponseInfo>());
-        Assert.False(response.Is<ResponseInvalid>());
-        Assert.False(response.Is<ResponseNone>());
+        Assert.True(response.IsSuccess());
+        Assert.False(response.IsNone());
+        Assert.False(response.IsInfo());
+        Assert.False(response.IsInvalid());
+        Assert.False(response.IsError());
+        Assert.False(response.IsCritical());
 
         if (response.Code == CreateResponseCode.Success)
         {
@@ -35,12 +37,12 @@ public class Tests
         var response = CreateResponse.Factory.UnknownError("An unknown error has occurred");
         
         Assert.That(response.Code, Is.EqualTo(CreateResponseCode.UnknownError));
-        Assert.False(response.Is<ResponseSuccess>());
-        Assert.False(response.Is<ResponseCritical>());
-        Assert.True(response.Is<ResponseError>());
-        Assert.False(response.Is<ResponseInfo>());
-        Assert.False(response.Is<ResponseInvalid>());
-        Assert.False(response.Is<ResponseNone>());
+        Assert.False(response.IsSuccess());
+        Assert.False(response.IsNone());
+        Assert.False(response.IsInfo());
+        Assert.False(response.IsInvalid());
+        Assert.True(response.IsError());
+        Assert.False(response.IsCritical());
 
         if (response.Code == CreateResponseCode.UnknownError)
         {

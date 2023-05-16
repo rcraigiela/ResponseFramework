@@ -1,4 +1,6 @@
-﻿using ResponseFramework.Responses;
+﻿using ResponseFramework.Extensions;
+using ResponseFramework.Extensions.ResponseLevel.Interfaces;
+using ResponseFramework.Responses;
 
 namespace ResponseFramework.Tests.Helpers;
 
@@ -11,7 +13,7 @@ public enum CreateResponseCode
     UnknownError = 500,
 }
 
-public class CreateResponse : ResponseBase<CreateResponseCode>
+public class CreateResponse : ResponseBase<CreateResponseCode>, IHasAllStatus
 {
     public static CreateResponseFactory Factory = new CreateResponseFactory();
     
